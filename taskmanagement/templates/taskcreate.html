@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  CREATE TASK
+  <form method="post" action="{% url 'createtask' %}">
+    {% csrf_token %}
+    <label>TASK</label>
+    <input type="text" id="task" name="task">
+    <label>DESCRIPTION</label>
+    <input type="text" id="desc" name="desc"]>
+    <label>COMPLETED OR NOT</label>
+    <input type="radio" id="complete" name="completed" value="True">completed
+    <input type="radio" id="complete" name="completed" value="False">Incomplete
+
+    <button type="submit">CREATE</button>
+  </form>
+
+</body>
+</html>

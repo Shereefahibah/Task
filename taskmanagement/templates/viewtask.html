@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+           
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+           
+            color: #0e0d0d; /* White text color */
+        }
+
+
+     
+
+  
+</style>
+<body>
+    <div class="search-bar">
+        <form method="get" action="{% url 'viewtask' %}">
+            <input type="text" name="q" placeholder="Search tasks..." value="{{ request.GET.q }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    {% if not tasks_found and request.GET.q %}
+        <div class="not-found">
+            No tasks found for "{{ request.GET.q }}".
+        </div>
+    {% endif %}
+    <table>
+        <tr>
+            <th>TASK NAME</th>
+            <th>DESCRIPTION</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
+        </tr>
+        {% for i in task %}
+        <tr>
+            <td>{{ i.title}}</td>
+            <td>{{ i.description }}</td>
+            <td>{% if i.completed == "completed" %}
+                Completed
+            {% else %}
+                Incomplete
+            {% endif %}</td>
+            <td>
+                <a href="{% url 'updatetask' i.id %}">UPDATE</a>
+                <a href="{% url 'removetask' i.id %}">DELETE</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'logout' %}">LOGOUT</a>
+</body>
+</html>
